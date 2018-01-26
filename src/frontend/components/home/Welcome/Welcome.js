@@ -3,7 +3,6 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import WelcomeImage from './box_of_veggie.jpg';
 import * as cardConstants from  './constants.js';
-import logo from '../NavigationBar/grain1.png';
 
 const WelcomeCard = () => (
   <Card>
@@ -17,10 +16,10 @@ const WelcomeCard = () => (
       <img src={WelcomeImage}/>
     </CardMedia>
 
-    <CardActions>
+    {/* <CardActions>
       <FlatButton label= {cardConstants.ADD_INGREDIENTS} />
       <FlatButton label= {cardConstants.ADD_VENDORS}/>
-    </CardActions>
+    </CardActions> */}
   </Card>
 );
 
