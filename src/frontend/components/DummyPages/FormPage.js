@@ -9,6 +9,7 @@ import DatePicker from 'material-ui/DatePicker';
 import {grey400} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 
+
 import PageBase from '../home/PageBase/PageBase';
 
 import {Link} from 'react-router-dom';
@@ -39,7 +40,6 @@ const FormPage = () => {
     <PageBase title="Form Page"
               navigation="Application / Form Page">
       <form>
-
         <TextField
           hintText="Name"
           floatingLabelText="Name"

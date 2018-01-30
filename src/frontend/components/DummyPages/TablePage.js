@@ -6,6 +6,7 @@ import ContentCreate from 'material-ui/svg-icons/content/create';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import {pink500, grey200, grey500} from 'material-ui/styles/colors';
 
+
 import PageBase from '../home/PageBase/PageBase';
 import Data from '../Data/data';
 
@@ -45,8 +46,8 @@ const TablePage = () => {
   };
 
   return (
-    <PageBase title="Table Page"
-              navigation="Application / Table Page">
+    // <PageBase title="Table Page"
+    //           navigation="Application / Table Page">
 
       <div>
         <Link to="/form" >
@@ -87,7 +88,7 @@ const TablePage = () => {
           </TableBody>
         </Table>
       </div>
-    </PageBase>
+    // </PageBase>
   );
 };
 

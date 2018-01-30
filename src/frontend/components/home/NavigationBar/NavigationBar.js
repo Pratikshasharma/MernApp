@@ -21,7 +21,7 @@ const styles = {
   title: {
     cursor: 'pointer',
     marginTop: 0,
-  
+
   },
 };
 
@@ -30,8 +30,6 @@ export default class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
   }
-
-
 
   static contextTypes = {
     router: PropTypes.object

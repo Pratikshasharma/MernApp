@@ -8,7 +8,9 @@ import NotFoundPage from './frontend/components/DummyPages/NotFoundPage.js';
 import LoginPage from './frontend/components/DummyPages/LoginPage';
 import FormPage from './frontend/components/DummyPages/FormPage';
 import TablePage from './frontend/components/DummyPages/TablePage';
-import WelcomeCard from './frontend/components/home/Welcome/Welcome';
+import WelcomeCard from './frontend/components/home/Welcome/Welcome.js';
+
+import dummy from './dummy.js';
 
 // export default (
 //   <Route>
@@ -24,19 +26,20 @@ import WelcomeCard from './frontend/components/home/Welcome/Welcome';
 // );
 
 const Routes = () => (
-  <Route>
-    <Route path="login" component={LoginPage}/>
-    <Route path = '/' component = {App} >
-    {/* <Switch> */}
-      <Route exact path='dashboard'  component={WelcomeCard}/>
-      <Route path='dashboard' component={WelcomeCard}/>
-      <Route path="form" component={LoginPage}/>
-      <Route path="table" component={TablePage}/>
-      <Route path="*" component={NotFoundPage}/>
-    {/* </Switch> */}
-    </Route>
-  </Route>
-)
+  // <Route>
+  <main>
+  <switch>
+    {/* <Route path="login" component={LoginPage}/> */}
+      {/* <Route path = '/' component = {App} /> */}
+      {/* <Route exact path="dashboard"  component={WelcomeCard}/> */}
+      <Route exact path='/dashboard' component={WelcomeCard}/>
+      <Route exact path='/addIngredientForm' component={FormPage}/>
+      <Route path='/table' component={TablePage}/>
+      <Route path='/login' component={LoginPage}/>
+      <Route path='*' component={NotFoundPage}/>
+  </switch>
+</main>
+);
 
 
 export default Routes;

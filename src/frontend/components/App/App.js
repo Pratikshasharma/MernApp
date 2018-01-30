@@ -10,6 +10,19 @@ import LeftDrawer from '../home/LeftDrawer/LeftDrawer.js';
 
 import Data from '../Data/data';
 
+import WelcomeCard from '../home/Welcome/Welcome.js'
+import LoginPage from '../DummyPages/LoginPage';
+import FormPage from '../DummyPages/FormPage';
+import TablePage from '../DummyPages/TablePage';
+
+import IngredientsTable from '../Ingredients/IngredientsTable';
+import CustomIngredients from '../Ingredients/CustomPaginationActionsTable';
+import AddIngredientsForm from '../Ingredients/AddIngredientForm';
+
+import AddIngredientFormOld from '../Ingredients/AddIngredientFormOld';
+
+
+
 const USERNAME_PLACEHOLDER = "User name ";
 
 class App extends React.Component {
@@ -57,10 +70,20 @@ class App extends React.Component {
                         menus={Data.menus}
                         username= {USERNAME_PLACEHOLDER} />
 
+            {/* <WelcomeCard /> */}
+            {/* <LoginPage /> */}
+            {/* <FormPage /> */}
+            {/* <TablePage /> */}
+            {/* <IngredientsTable/> */}
+          {/* < CustomIngredients/> */}
+          < AddIngredientFormOld/>
+
+
             <div style={styles.container}>
               {this.props.children}
             </div>
         </div>
+
       </MuiThemeProvider>
     );
   }
