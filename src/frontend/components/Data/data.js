@@ -1,12 +1,12 @@
 import React from 'react';
-import Assessment from 'material-ui/svg-icons/action/assessment';
-import GridOn from 'material-ui/svg-icons/image/grid-on';
-import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
-import Web from 'material-ui/svg-icons/av/web';
-import {cyan600, pink600, purple600} from 'material-ui/styles/colors';
-import ExpandLess from 'material-ui/svg-icons/navigation/expand-less';
-import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import Assessment from 'material-ui-icons/Assessment';
+import GridOn from 'material-ui-icons/GridOn';
+import PermIdentity from 'material-ui-icons/PermIdentity';
+import Web from 'material-ui-icons/Web';
+// import {cyan600, pink600, purple600} from 'material-ui/styles/colors';
+import ExpandLess from 'material-ui-icons/ExpandLess';
+import ExpandMore from 'material-ui-icons/ExpandMore';
+import ChevronRight from 'material-ui-icons/ChevronRight';
 
 const product_names = "product 1, product 2, product 3, product 4 ";
 
@@ -75,12 +75,12 @@ const data = {
       {pv: 4800},
       {pv: 3490},
       {pv: 4300}
-    ],
-    browserUsage: [
-      {name: 'Chrome', value: 800, color: cyan600, icon: <ExpandMore/>},
-      {name: 'Firefox', value: 300, color: pink600, icon: <ChevronRight/>},
-      {name: 'Safari', value: 300, color: purple600, icon: <ExpandLess/>}
     ]
+    // browserUsage: [
+    //   {name: 'Chrome', value: 800, color: cyan600, icon: <ExpandMore/>},
+    //   {name: 'Firefox', value: 300, color: pink600, icon: <ChevronRight/>},
+    //   {name: 'Safari', value: 300, color: purple600, icon: <ExpandLess/>}
+    // ]
   }
 };
 

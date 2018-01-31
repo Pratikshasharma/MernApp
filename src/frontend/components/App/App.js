@@ -3,23 +3,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
-import ThemeDefault from './theme-default';
+import theme from './theme-default';
 
-import Header from '../home/Header/Header.js';
-import LeftDrawer from '../home/LeftDrawer/LeftDrawer.js';
+// import Header from '../home/Header/Header.js';
+// import LeftDrawer from '../home/LeftDrawer/LeftDrawer.js';
 
 import Data from '../Data/data';
 
 import WelcomeCard from '../home/Welcome/Welcome.js'
-import LoginPage from '../DummyPages/LoginPage';
-import FormPage from '../DummyPages/FormPage';
-import TablePage from '../DummyPages/TablePage';
 
-import IngredientsTable from '../Ingredients/IngredientsTable';
-import CustomIngredients from '../Ingredients/CustomPaginationActionsTable';
-import AddIngredientsForm from '../Ingredients/AddIngredientForm';
 
-import AddIngredientFormOld from '../Ingredients/AddIngredientFormOld';
+import IngredientsTable from '../Ingredients/IngredientTable';
+
+
+
+// import AddIngredientForm from '../Ingredients/AddIngredientForm';
 
 
 
@@ -61,22 +59,19 @@ class App extends React.Component {
     };
 
     return (
-      <MuiThemeProvider muiTheme={ThemeDefault}>
+      <MuiThemeProvider muiTheme={theme}>
         <div>
-          <Header styles={styles.header}
-                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+          {/* <Header styles={styles.header}
+                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/> */}
 
-            <LeftDrawer navDrawerOpen={navDrawerOpen}
+            {/* <LeftDrawer navDrawerOpen={navDrawerOpen}
                         menus={Data.menus}
-                        username= {USERNAME_PLACEHOLDER} />
+                        username= {USERNAME_PLACEHOLDER} /> */}
 
             {/* <WelcomeCard /> */}
-            {/* <LoginPage /> */}
-            {/* <FormPage /> */}
-            {/* <TablePage /> */}
-            {/* <IngredientsTable/> */}
-          {/* < CustomIngredients/> */}
-          < AddIngredientFormOld/>
+
+            <IngredientsTable/>
+          {/* < AddIngredientForm/> */}
 
 
             <div style={styles.container}>

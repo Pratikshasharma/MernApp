@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import FlatButton from 'material-ui/Button';
 import WelcomeImage from './box_of_veggie.jpg';
 import * as cardConstants from  './constants.js';
 
@@ -16,10 +16,10 @@ const WelcomeCard = () => (
       <img src={WelcomeImage}/>
     </CardMedia>
 
-    {/* <CardActions>
+    <CardActions>
       <FlatButton label= {cardConstants.ADD_INGREDIENTS} />
       <FlatButton label= {cardConstants.ADD_VENDORS}/>
-    </CardActions> */}
+    </CardActions>
   </Card>
 );
 
