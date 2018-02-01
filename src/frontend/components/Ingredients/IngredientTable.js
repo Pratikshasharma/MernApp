@@ -136,22 +136,7 @@ const availableValues = {
   // vendors: testData.tablePage.vendor_options,
   vendors: testData.tablePage.vendor_options2,
 
-  // DEMO
-  // product: globalSalesValues.product,
-  // region: globalSalesValues.region,
-  // customer: globalSalesValues.customer,
 };
-
-
-// handleOnChange (value) {
-//   console.log("CHANGE ");
-//     const {multi} = this.state;
-//     if (multi) {
-//       this.setState({ multiVal: value })
-//     } else {
-//       this.setState({value:value})
-//     }
-// };
 
 var variables = [];
 
@@ -161,12 +146,12 @@ const MultiSelectCellBase = ({
   <TableCell
     className={classes.lookupEditCell}
   >
-    <ReactSelect
+    <ReactSelect.Creatable
         // type = "create"
-        multi={false}
+        multi={true}
         options={availableColumnValues}
-        onChange={(option) => onValueChange(option.value)}
-
+        // onChange={(option) => {{value : option}};
+        onChange={(option) => {onValueChange(option); multiVal.push(option);}}
         value = {value}
         input={
         <Input
@@ -174,8 +159,8 @@ const MultiSelectCellBase = ({
             id="select-multiple"
         />
       }
-    >
-    </ReactSelect>
+    />
+    {/* </ReactSelect> */}
   </TableCell>
 );
 
@@ -189,7 +174,7 @@ MultiSelectCellBase.propTypes = {
 };
 
 MultiSelectCellBase.defaultProps = {
-  value: undefined,
+  value: PropTypes.any,
 };
 
 export const MultiSelectCell = withStyles(styles, { name: 'ControlledModeDemo' })(MultiSelectCellBase);
@@ -260,7 +245,7 @@ const EditCell = (props) => {
   if (props.column.name =='vendors') {
     console.log('Options ' + availableColumnValues);
     return  <MultiSelectCell {...props} availableColumnValues={availableColumnValues}
-    multi = {false} multiVal = {[]}/>;
+    multi = {true} multiVal = {[]}/>;
   }else if (availableColumnValues){
     return <LookupEditCell {...props} availableColumnValues={availableColumnValues}/>;
   }
@@ -269,67 +254,6 @@ const EditCell = (props) => {
 EditCell.propTypes = {
   column: PropTypes.shape({ name: PropTypes.string }).isRequired,
 };
-
-
-
-/* Class for the multi select stuff */
-// class multiSelectClass extends React.Component{
-//   constructor(props){
-//     super (props);
-//
-//     this.state = {
-//       multiVal:[],
-//       multi:false,
-//     }
-//   }
-//
-//     handleOnChange (option) {
-//       console.log("CHANGE ");
-//         const {multi} = this.state;
-//         if (multi) {
-//           this.setState({ multiVal: value })
-//         } else {
-//           this.setState({value:value})
-//         };
-//     };
-//
-// const MultiSelectCellBase = ({ multiVal, multi, availableColumnValues, value, classes}) => (
-//       <TableCell
-//         className={classes.multiselectCell}
-//       >
-//         <ReactSelect
-//             // type = "create"
-//             multi={true}
-//             options={availableColumnValues}
-//             onChange={(option) => handleOnChange(option)}
-//             value = {value}
-//             input={
-//             <Input
-//               classes={{ root: classes.inputRoot }}
-//                 id="select-multiple"
-//             />
-//           }
-//         >
-//         </ReactSelect>
-//       </TableCell>
-//     );
-//   };
-
-
-// export const MultiSelectCell = withStyles(styles, { name: 'ControlledModeDemo' })(MultiSelectCellBase);
-//
-//   MultiSelectCellBase.propTypes = {
-//       availableColumnValues: PropTypes.array.isRequired,
-//       value: PropTypes.any,
-//       onValueChange: PropTypes.func.isRequired,
-//       classes: PropTypes.object.isRequired,
-//       multi:PropTypes.bool.isRequired,
-//       multiVal: PropTypes.array.isRequired,
-//       };
-//
-//     MultiSelectCellBase.defaultProps = {
-//       value: undefined,
-//     };
 
 
 const getRowId = row => row.id;
@@ -341,34 +265,16 @@ class DemoBase extends React.PureComponent {
     super(props);
 
     this.state = {
-      // multi: false,
-      // multiVal:[],
       columns: [
         { name: 'name', title: 'Name' },
         { name: 'pkg', title: 'Package' },
         { name: 'temperature', title: 'Temperature' },
         { name: 'vendors', title: 'Vendors' },
-
-        // DEMO
-        // { name: 'saleDate', title: 'Sale Date' },
-        // { name: 'customer', title: 'Customer' },
-        // { name: 'product', title: 'Product' },
-        // { name: 'region', title: 'Region' },
-        // { name: 'amount', title: 'Sale Amount' },
-        // { name: 'discount', title: 'Discount' },
-        // { name: 'saleDate', title: 'Sale Date' },
-        // { name: 'customer', title: 'Customer' },
       ],
 
       tableColumnExtensions: [
         { columnName: 'package', align: 'right' },
       ],
-      // DEMO
-      // rows: generateRows({
-      //   columnValues: { id: ({ index }) => index, ...globalSalesValues },
-      //   length: 12,
-      // }),
-
       rows: testData.tablePage.items,
       sorting: [],
       editingRowIds: [],
@@ -388,15 +294,7 @@ class DemoBase extends React.PureComponent {
     this.changeAddedRows = addedRows => this.setState({
       addedRows: addedRows.map(row => (Object.keys(row).length ? row : {
 
-        // DEMO
-        // amount: 0,
-        // discount: 0,
-        // saleDate: new Date().toISOString().split('T')[0],
-        // product: availableValues.product[0],
-        // region: availableValues.region[0],
-        // customer: availableValues.customer[0],
-
-        ingredients: testData.tablePage.ingredient_options[0],
+        name: testData.tablePage.ingredient_options[0],
         vendors: testData.tablePage.vendor_options[0],
         temperature: testData.tablePage.temperature_options[0],
         pkg:testData.tablePage.package_options[0],
@@ -409,64 +307,102 @@ class DemoBase extends React.PureComponent {
     this.commitChanges = ({ added, changed, deleted }) => {
       console.log("Commit Changes");
       let { rows } = this.state;
+
       if (added) {
         console.log(" added " + added);
+        console.log(" Keys " + Object.keys(added));
+        // console.log("Id " + added.row.id);
         const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
-        rows = [
-          ...rows,
-          ...added.map((row, index) => ({
-            id: startingAddedId + index,
-            ...row,
-          })),
-        ];
+        console.log("Starting Id " + startingAddedId);
+
+
+        // TODO: Add checks for Values
+        var vendors_string = "";
+
+        for(var i =0; i < added[0].vendors.length; i++){
+          vendors_string+=added[0].vendors[i].value;
+          if(i!= (added[0].vendors).length -1){
+            vendors_string+=',';
+          }
+        }
+        added[0].vendors = vendors_string;
+        added[0].id = startingAddedId;
+
+        rows = [...rows,added[0]];
+
+        // TODO: Send data to back end
+
       }
+
       if (changed) {
         console.log("changed " + Object.keys(changed));
-        // console.log("changed Row ID: " + changed[row.id]);
 
         for(var i =0; i < rows.length; i++){
-          // row = rows[i];
-          console.log("Row: " +  rows[i].id + " " + rows[i].name + " " + rows[i].pkg + " " + rows[i].temperature);
-          console.log("Changed Row Id " + changed[rows[i].id]);
-
           // Accessing the changes made to the rows and displaying them
           if(changed[rows[i].id]){
-            console.log(" ...rows[i] " + {...rows[i]}.name);
-            console.log("...changed[rows[i].id] " + {...changed[rows[i].id]}.vendors);
-          }
+            if(changed[rows[i].id].name){
+              rows[i].name = changed[rows[i].id].name;
+            }
+            if(changed[rows[i].id].pkg){
+              rows[i].pkg = changed[rows[i].id].pkg;
+            }
 
-        }
-        rows = rows.map(row => (changed[row.id] ? { ...row, ...changed[row.id] } : row));
+            if(changed[rows[i].id].temperature){
+              rows[i].temperature = changed[rows[i].id].temperature;
+            }
+            var vendor_string = "";
 
+            // parse vendors into a string
+            if(changed[rows[i].id].vendors){
+              for(var j = 0; j < (changed[rows[i].id].vendors).length ; j++){
+                vendor_string += changed[rows[i].id].vendors[j].value;
+                if(j!= (changed[rows[i].id].vendors).length -1){
+                  vendor_string+=',';
+                }
+              }
+              rows[i].vendors = vendor_string;
+            }
+          };
+        };
       }
-      this.setState({ rows, deletingRows: deleted || this.state.deletingRows });
+
+    this.setState({ rows, deletingRows: deleted || this.state.deletingRows });
     };
+
     this.cancelDelete = () => this.setState({ deletingRows: [] });
+
     this.deleteRows = () => {
       const rows = this.state.rows.slice();
+
       this.state.deletingRows.forEach((rowId) => {
         const index = rows.findIndex(row => row.id === rowId);
+
         if (index > -1) {
+          // This line removes the data from the rows
+          //TODO: get the right data and send it to back end for delete
+          var name = rows[index].name;
+          var pkg = rows[index].pkg;
+
           rows.splice(index, 1);
         }
       });
+
       this.setState({ rows, deletingRows: [] });
     };
+
     this.changeColumnOrder = (order) => {
       this.setState({ columnOrder: order });
     };
-    /* end of constructor */
   }
-
 
   handleRowChange({rowChanges}){
     console.log("ROW CHANGES Keys: " + Object.keys(rowChanges));
-    console.log("Vals: " + Object.keys(rowChanges)[0]);
-    console.log("Vals: " + Object.keys(rowChanges)[1]);
 
     console.log("RC" + rowChanges.id + rowChanges.name + rowChanges.pkg + rowChanges.vendors);
     this.setState ({rowChanges: rowChanges});
   }
+
+
   render() {
     const {
       classes,
@@ -489,6 +425,7 @@ class DemoBase extends React.PureComponent {
     return (
       <Paper>
         <Grid
+          allowColumnResizing = {true}
           rows={rows}
           columns={columns}
           getRowId={getRowId}
