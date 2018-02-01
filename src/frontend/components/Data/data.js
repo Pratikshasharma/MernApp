@@ -40,9 +40,9 @@ const data = {
     // ]
 
     items: [
-      {name: "black",pkg: "hue",temperature: "primary", vendors: "vendor1"},
-      {name: "black",pkg: "hue",temperature: "primary", vendors: "vendor1"},
-      {name: "black",pkg: "hue",temperature: "primary", vendors: "vendor1"},
+      {name: "pepper",pkg: "sack",temperature: "room", vendors: "vendor1/10, vendor2/20"},
+      {name: "salt",pkg: "sack",temperature: "fridge", vendors: "vendor3/20, vendor4/30"},
+      {name: "oil",pkg: "pail",temperature: "room", vendors: "target/35"},
     ]
 
   },

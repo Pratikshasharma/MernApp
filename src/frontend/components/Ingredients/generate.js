@@ -231,7 +231,11 @@ export function generateRows({
     });
 
     data.push(record);
+    console.log(record);
   }
-
+  for(var i=0;i<data.length;i++){
+    console.log("data " + data[i].discount);
+  }
+  // console.log(" data " + data[0].name);
   return data;
 }

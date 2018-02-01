@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import PageBase from '../home/PageBase/PageBase';
-import RaisedButton from 'material-ui/lib/raise-button';
+import RaisedButton from 'material-ui/Button';
 import {Link} from 'react-router-dom';
 import Styles from  'react-select/dist/react-select.css';
 import data from './Data';
@@ -34,13 +34,12 @@ const styles = {
   };
 
 
-
 class AddIngredientForm extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
   		vendors: [],
-  		value: '',
+  		value:undefined,
       name:'',
       pkg:'',
       temperature:'',
@@ -50,21 +49,22 @@ class AddIngredientForm extends React.Component{
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  handleOnChange (value) {
+  handleOnChange (option) {
     console.log("CHANGE ");
   		const {multi} = this.state;
   		if (multi) {
-  			this.setState({ vendors: value });
+  			this.setState({vendors: option});
   		} else {
-  			this.setState({value:value});
+  			this.setState({value:option});
   		};
   	};
 
   onFormSubmit(e) {
     // console.log("SUBMIT");
-    // console.log(" name " + this.state.name.value);
-    // console.log(" Package " + this.state.pkg.value);
-    // console.log(" temp " + this.state.temperature.value);
+    console.log(" name " + this.state.name.value);
+    console.log(" Package " + this.state.pkg.value);
+    console.log(" temp " + this.state.temperature.value);
+    console.log("vendors " + this.state.vendors);
 
     // Convert vendors from an object into an array to store in the database
     const vendorsArray = [];
@@ -80,6 +80,9 @@ class AddIngredientForm extends React.Component{
 
     }
 
+    handleNewOptionClick(option){
+      console.log("New Option was clicked: " + option.value);
+    }
 
   render (){
     const { name, pkg, temperature, vendors } = this.state;
@@ -99,7 +102,7 @@ class AddIngredientForm extends React.Component{
                 <label> Package </label>
                 <Select
                   // type = "create"
-                  multi={false}
+                  multi={true}
                   options={data.package_options}
                   onChange={(value) => this.setState({pkg: value})}
                   value = {pkg}/>
@@ -115,22 +118,26 @@ class AddIngredientForm extends React.Component{
               </div>
               <div style = {styles.buttons}>
                 <label> Vendors </label>
-                <Select
+                <Select.Creatable
                   // type = "create"
                   multi={true}
+                  joinValues = {true}
                   options={vendor_options}
-                  onChange={(value) => this.handleOnChange(value)}
+                  // onNewOptionClick= {(option)=> this.handleNewOptionClick(option)}
+                  onChange={(option) => this.handleOnChange(option)}
                   value = {vendors}
                   />
               </div>
               <div style={styles.buttons}>
                 {/* <Link to="/"> */}
-                  <RaisedButton label="Cancel"/>
+                  <RaisedButton raised color = "secondary" >CANCEL</RaisedButton>
                 {/* </Link> */}
-                <RaisedButton label="Save"
-                              style={styles.saveButton}
-                              type="Submit"
-                              primary={true}/>
+                <RaisedButton raised
+                          color="primary"
+                          // className=classes.button
+                          style={styles.saveButton}
+                          type="Submit"
+                          primary={true}> SAVE </RaisedButton>
              </div>
            </form>
          </PageBase>

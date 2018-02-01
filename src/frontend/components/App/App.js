@@ -17,7 +17,7 @@ import IngredientsTable from '../Ingredients/IngredientTable';
 
 
 
-// import AddIngredientForm from '../Ingredients/AddIngredientForm';
+import AddIngredientForm from '../Ingredients/AddIngredientForm';
 
 
 
