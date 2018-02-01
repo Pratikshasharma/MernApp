@@ -32,15 +32,11 @@ import { withStyles } from 'material-ui/styles';
 import Styles from  'react-select/dist/react-select.css';
 import ReactSelect from 'react-select';
 
-import {ProgressBarCell} from './ProgressBarCell.jsx';
-import {HighlightedCell} from './HighlightedCell';
+
 
 import testData from './testIngredients';
 
-import {
-  generateRows,
-  globalSalesValues,
-} from './generate';
+
 
 const styles = theme => ({
   lookupEditCell: {
@@ -130,16 +126,17 @@ Command.propTypes = {
   onExecute: PropTypes.func.isRequired,
 };
 
+// data to populate options on the drop down
 const availableValues = {
   pkg: testData.tablePage.package_options,
   temperature: testData.tablePage.temperature_options,
   // vendors: testData.tablePage.vendor_options,
+
   vendors: testData.tablePage.vendor_options2,
 
 };
 
-var variables = [];
-
+// Select that lets you create new option,
 const MultiSelectCellBase = ({
   multiVal, multi, availableColumnValues, value, onValueChange, classes,
 }) => (
@@ -150,8 +147,10 @@ const MultiSelectCellBase = ({
         // type = "create"
         multi={true}
         options={availableColumnValues}
+
         // onChange={(option) => {{value : option}};
-        onChange={(option) => {onValueChange(option); multiVal.push(option);}}
+        // multiVal.push(option)
+        onChange={(option) => {onValueChange(option);}}
         value = {value}
         input={
         <Input
@@ -218,17 +217,6 @@ export const LookupEditCell = withStyles(styles, { name: 'ControlledModeDemo' })
 
 
 const Cell = (props) => {
-  if (props.column.name === 'vendors') {
-    // Print keys of props
-    console.log("PROP Keys: " + Object.keys(props));
-    console.log("Values: " + Object.values(props));
-
-    // return <ProgressBarCell {...props} />;
-  }
-
-  if (props.column.name === 'amount') {
-    return <HighlightedCell {...props} />;
-  }
   return <Table.Cell {...props} />;
 };
 
@@ -238,11 +226,16 @@ Cell.propTypes = {
 
 const EditCell = (props) => {
   console.log('Options Choice ' + props.column.name);
+  // console.log('EditCell Keys: ' + Object.keys(props));
+  // console.log('Rows: ' + props.row.vendors);
+
   const availableColumnValues = availableValues[props.column.name];
+  // const availableColumnValues = availableValues[props.column.name];
 
   // EDIT to make changes to the multi select things //
   /* CHANGE */
   if (props.column.name =='vendors') {
+
     console.log('Options ' + availableColumnValues);
     return  <MultiSelectCell {...props} availableColumnValues={availableColumnValues}
     multi = {true} multiVal = {[]}/>;
@@ -275,7 +268,10 @@ class DemoBase extends React.PureComponent {
       tableColumnExtensions: [
         { columnName: 'package', align: 'right' },
       ],
+
+      // TODO: Get Data from the back end
       rows: testData.tablePage.items,
+
       sorting: [],
       editingRowIds: [],
       addedRows: [],
@@ -287,7 +283,7 @@ class DemoBase extends React.PureComponent {
       columnOrder: ['name', 'pkg', 'temperature', 'vendors'],
     };
 
-    console.log(" NAME : " + testData.tablePage.items[0].name);
+    // console.log(" NAME : " + testData.tablePage.items[0].name);
 
     this.changeSorting = sorting => this.setState({ sorting });
     this.changeEditingRowIds = editingRowIds => this.setState({ editingRowIds });
@@ -325,6 +321,7 @@ class DemoBase extends React.PureComponent {
             vendors_string+=',';
           }
         }
+
         added[0].vendors = vendors_string;
         added[0].id = startingAddedId;
 

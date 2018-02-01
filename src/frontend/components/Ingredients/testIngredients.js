@@ -8,7 +8,7 @@ const data = {
       // ['pepper','sack','room temperature','vendor 1'],
       // ['pepper','sack','room temperature','vendor 1'],
 
-        {id : 0, name: "pepper",pkg: "sack",temperature: "room", vendors: "vendor1/10, vendor2/20"},
+        {id : 0, name: "pepper",pkg: "sack",temperature: "room", vendors: "vendor1, vendor2"},
         {id : 1, name: "salt",pkg: "sack",temperature: "fridge", vendors: "vendor3/20, vendor4/30"},
         {id : 2, name: "oil",pkg: "pail",temperature: "room", vendors: "target/35"},
         {id : 3, name: "pepper",pkg: "sack",temperature: "room", vendors: "vendor1/10, vendor2/20"},
